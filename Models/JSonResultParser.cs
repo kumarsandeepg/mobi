@@ -11,10 +11,18 @@ namespace MobileAshApi.Models
     {
         internal T Parse<T>(string json)
         {
-            var root = JObject.Parse(json);
-            var d = root["d"];
-            var result = JsonConvert.DeserializeObject<T>(d.ToString());
-            return result;
+            try
+            {
+                var root = JObject.Parse(json);
+                var d = root;//["d"];
+                var result = JsonConvert.DeserializeObject<T>(d.ToString());
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
     }
 }

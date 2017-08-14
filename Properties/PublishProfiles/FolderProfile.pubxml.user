@@ -14,10 +14,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2016 03:10:32</publishTime>
     </File>
     <File Include="bin/MobileAshApi.dll">
-      <publishTime>08/14/2017 08:16:08</publishTime>
+      <publishTime>08/14/2017 10:09:10</publishTime>
     </File>
     <File Include="bin/MobileAshApi.pdb">
-      <publishTime>08/14/2017 08:16:08</publishTime>
+      <publishTime>08/14/2017 10:09:10</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>08/03/2014 20:33:56</publishTime>
@@ -116,7 +116,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/13/2017 09:11:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/13/2017 13:49:36</publishTime>
+      <publishTime>08/14/2017 09:54:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

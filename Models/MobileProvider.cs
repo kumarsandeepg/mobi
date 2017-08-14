@@ -6,11 +6,11 @@ using System.Web;
 
 namespace MobileAshApi.Models
 {
-    public class ErrorCodes
+    internal class ErrorCodes
     {
-        public static Dictionary<int, string> Codes = new Dictionary<int, string> { };
+        public Dictionary<int, string> Codes = new Dictionary<int, string> { };
 
-        private ErrorCodes()
+        internal ErrorCodes()
         {
             Codes.Add(1000, "SUCCESS");
             Codes.Add(1002, "LOGIN FAILED");
@@ -32,13 +32,15 @@ namespace MobileAshApi.Models
     }
 
     public class ResponseStatus
-    {        
+    {
+        internal string __type { get; set; }
+        public string Status { get; set; }
     }
 
 
     public class MobileServiceProvider : ResponseStatus
     {
-        internal string __type { get; set; }
+        //internal string __type { get; set; }
         public string Code { get; set; }
         public string Provider { get; set; }
         public string State { get; set; }
@@ -46,15 +48,28 @@ namespace MobileAshApi.Models
         public int CId { get; set; }
     }
 
-    public class RechargeStatus : ResponseStatus
+    public class BalanceProvider:ResponseStatus
     {
-        internal string ReqId { get; set; }
-        public string Status { get; set; }
+        public string Balance { get; set; }
+    }
+
+    public class ComplaintStatus:ResponseStatus
+    {
+        
+    }
+
+    public class RechargeStatus : ResponseStatus
+    {        
+        public string ReqId { get; set; }        
         public string Remark { get; set; }
         public string Balance { get; set; }
+        internal string MN { get; set; }
         internal string Field1 { get; set; }
+        public int EC { get; set; }
+        internal string ApirefId { get; set; }
+
         public string Error { get; set; }
-        public string MobileNumber { get; set; }
-        internal int ErrorCode { get; set; }        
+
+        public string MobileNumber { get { return MN; } }        
     }
 }

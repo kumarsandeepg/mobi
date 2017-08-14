@@ -10,21 +10,45 @@ namespace MobileAshApi.BL
 {
     public class WebServiceClient
     {
-        public async Task<T> WebClientResponse<T>(string url, object param)
+        public async Task<T> WebClientResponse<T>(string url, object param, bool ensureStatus=true)
         {
-            HttpClientHandler handler = new HttpClientHandler();
+            try
+            {
+                var result = await WebClientJSonStr(url, param, ensureStatus);
+                Models.JSonResultParser parser = new JSonResultParser();
 
-            HttpClient httpClient = new HttpClient(handler);
+                return parser.Parse<T>(result);
+            }
+            catch(Exception) { throw; }
+        }
 
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, param);//, new { mn = mobile });
+        public async Task<string> WebClientJSonStr(string url, object param, bool ensureStatus)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler();
 
-            response.EnsureSuccessStatusCode();
+                HttpClient httpClient = new HttpClient(handler);
 
-            var result = response.Content.ReadAsStringAsync().Result;
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, param);//, new { mn = mobile });
 
-            Models.JSonResultParser parser = new JSonResultParser();
+                if (ensureStatus)
+                {
+                    response.EnsureSuccessStatusCode();
+                }
 
-            return parser.Parse<T>(result);
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                var root = Newtonsoft.Json.Linq.JObject.Parse(result);
+
+                var d = root["d"].ToString();
+
+                return d;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
